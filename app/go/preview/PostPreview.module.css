@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.image {
+  width: calc(100% + 32px);
+  height: auto;
+  margin: -16px -16px 0;
+}
+
+.stats {
+  font-size: 0.8rem;
+  color: #999;
+}

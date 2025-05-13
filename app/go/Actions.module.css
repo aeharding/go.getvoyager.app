@@ -1,0 +1,24 @@
+.subtitle {
+  width: 100%;
+
+  margin: 0 -16px;
+  padding: 16px;
+
+  background: linear-gradient(to right, #001e4c, #0049632b);
+
+  /* if light mode, use a different background */
+  @media (prefers-color-scheme: light) {
+    background: linear-gradient(to right, #93b2e8, #00bbff2b);
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+
+  border-radius: 16px;
+
+  p {
+    margin: 0;
+  }
+}

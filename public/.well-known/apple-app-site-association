@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "app.vger.voyager"
+        ],
+        "components": [
+          {
+            "/": "/*/*"
+          }
+        ]
+      }
+    ]
+  }
+}
