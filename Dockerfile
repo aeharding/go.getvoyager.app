@@ -2,7 +2,7 @@ FROM node:20-alpine AS development-dependencies-env
 COPY . /app
 WORKDIR /app
 RUN corepack enable
-RUN pnpm install --dev
+RUN pnpm install
 
 FROM node:20-alpine AS production-dependencies-env
 COPY ./package.json pnpm-lock.yaml /app/
