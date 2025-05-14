@@ -3,11 +3,11 @@
     "details": [
       {
         "appIDs": [
-          "app.vger.voyager"
+          "SYTN44U2UN.app.vger.voyager"
         ],
         "components": [
           {
-            "/": "/*/*"
+            "/": "/*/*/*"
           }
         ]
       }
