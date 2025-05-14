@@ -1,5 +1,10 @@
-// Simple in-memory cache for Lemmy instance verification
-const instanceCache = new Map<string, boolean>();
+import TTLCache from "@isaacs/ttlcache";
+import { LEMMY_CLIENT_HEADERS } from "~/helpers/resolve";
+
+// Cache for Lemmy instance verification with 15-minute TTL
+const instanceCache = new TTLCache<string, boolean>({
+  ttl: 1000 * 60 * 15, // 15 minutes in milliseconds
+});
 
 interface NodeInfoLinks {
   links: Array<{
@@ -37,6 +42,7 @@ export async function determineIsLemmyInstance(
         method: "GET",
         headers: {
           Accept: "application/json",
+          ...LEMMY_CLIENT_HEADERS,
         },
       },
     );
@@ -63,6 +69,7 @@ export async function determineIsLemmyInstance(
       method: "GET",
       headers: {
         Accept: "application/json",
+        ...LEMMY_CLIENT_HEADERS,
       },
     });
 

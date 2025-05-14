@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { getHostname } from "~/helpers/resolve";
 import GetApp from "./getApp/GetApp";
 import styles from "./Actions.module.css";

@@ -12,12 +12,12 @@ export default function PostPreview({ post }: PostPreviewProps) {
         <img
           src={post.post.url}
           alt={post.post.name}
-          className={styles.image}
+          className={`${styles.image} ${post.post.nsfw ? styles.blur : ""}`}
         />
       )}
       <h2 className={styles.title}>{post.post.name}</h2>
       <div className={styles.stats}>
-        {post.counts.score} votes, {post.counts.comments} comments
+        {post.counts.score} votes • {post.counts.comments} comments
       </div>
     </div>
   );

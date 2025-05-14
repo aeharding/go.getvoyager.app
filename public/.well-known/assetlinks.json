@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vger.voyager",
+      "sha256_cert_fingerprints": [
+        "8B:4D:5C:F6:9E:AF:14:7C:D9:A8:68:C7:40:D3:7D:5F:E1:47:1A:2F:62:C6:7D:53:60:38:BC:DB:D9:BC:7A:DE"
+      ]
+    }
+  }
+]

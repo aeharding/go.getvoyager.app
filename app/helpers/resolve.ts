@@ -3,10 +3,20 @@ import {
   type LemmyErrorType,
   type ResolveObjectResponse,
 } from "lemmy-js-client";
+import TTLCache from "@isaacs/ttlcache";
+
+// Cache for resolved objects with 15-minute TTL
+const resolveCache = new TTLCache<string, Promise<ResolveObjectResponse>>({
+  ttl: 1000 * 60 * 15, // 15 minutes in milliseconds
+});
 
 export const POST_PATH = /^\/post\/(\d+)$/;
 
 export const COMMENT_PATH = /^\/comment\/(\d+)$/;
+
+export const LEMMY_CLIENT_HEADERS = {
+  "User-Agent": "go.getvoyager.app",
+} as const;
 
 /**
  * Lemmy 0.19.4 added a new url format to reference comments,
@@ -93,17 +103,17 @@ function getObjectName(urlPathname: string): string | undefined {
 }
 
 /**
- *
- * @param url Any URL of a remote Lemmy resource
- * @returns The object, if found
+ * Internal implementation of resolveObject without caching.
+ * This is the actual logic that makes the API calls.
  */
-export const resolveObject = async (
+async function _resolveObjectUncached(
   url: string,
-): Promise<ResolveObjectResponse> => {
+): Promise<ResolveObjectResponse> {
   let object;
 
   const client = new LemmyHttp(
     buildInstanceUrl(getHostname(normalizeObjectUrl(url))),
+    { headers: LEMMY_CLIENT_HEADERS },
   );
 
   try {
@@ -136,22 +146,26 @@ export const resolveObject = async (
   }
 
   return object;
-};
-
-export function normalizeObjectUrl(objectUrl: string) {
-  let url = objectUrl;
-
-  // Replace app schema "vger" with "https"
-  url = url.replace(/^vger:\/\//, "https://");
-
-  // Strip fragment
-  url = url.split("#")[0]!;
-
-  // Strip query parameters
-  url = url.split("?")[0]!;
-
-  return url;
 }
+
+/**
+ * Resolves a Lemmy object URL, with caching to prevent duplicate API calls.
+ * The cache has a 15-minute TTL.
+ */
+export const resolveObject = async (
+  url: string,
+): Promise<ResolveObjectResponse> => {
+  const normalizedUrl = normalizeObjectUrl(url);
+
+  // Check cache first
+  const cached = resolveCache.get(normalizedUrl);
+  if (cached) return cached;
+
+  // Create new promise and cache it
+  const promise = _resolveObjectUncached(url);
+  resolveCache.set(normalizedUrl, promise);
+  return promise;
+};
 
 /**
  * FINE. we'll do it the hard/insecure way and ask original instance >:(
@@ -160,7 +174,9 @@ export function normalizeObjectUrl(objectUrl: string) {
 async function findFedilink(url: string): Promise<string | undefined> {
   const { hostname, pathname } = new URL(normalizeObjectUrl(url));
 
-  const client = new LemmyHttp(buildInstanceUrl(hostname));
+  const client = new LemmyHttp(buildInstanceUrl(hostname), {
+    headers: LEMMY_CLIENT_HEADERS,
+  });
 
   const potentialCommentId = findCommentIdFromUrl(pathname);
 
@@ -181,6 +197,7 @@ async function findFedilink(url: string): Promise<string | undefined> {
 
     const response = await new LemmyHttp(
       buildInstanceUrl(userHostname ?? hostname),
+      { headers: LEMMY_CLIENT_HEADERS },
     ).getPersonDetails({
       username,
     });
@@ -191,6 +208,7 @@ async function findFedilink(url: string): Promise<string | undefined> {
 
     const response = await new LemmyHttp(
       buildInstanceUrl(communityHostname ?? hostname),
+      { headers: LEMMY_CLIENT_HEADERS },
     ).getCommunity({
       name: community,
     });
@@ -203,6 +221,21 @@ function findCommentIdFromUrl(pathname: string): number | undefined {
   if (COMMENT_PATH.test(pathname)) return +pathname.match(COMMENT_PATH)![1]!;
   if (COMMENT_VIA_POST_PATH.test(pathname))
     return +pathname.match(COMMENT_VIA_POST_PATH)![1]!;
+}
+
+export function normalizeObjectUrl(objectUrl: string) {
+  let url = objectUrl;
+
+  // Replace app schema "vger" with "https"
+  url = url.replace(/^vger:\/\//, "https://");
+
+  // Strip fragment
+  url = url.split("#")[0]!;
+
+  // Strip query parameters
+  url = url.split("?")[0]!;
+
+  return url;
 }
 
 export function buildInstanceUrl(instance: string) {

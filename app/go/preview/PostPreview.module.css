@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  flex: 1;
+  min-height: 0;
 }
 
 .title {
@@ -11,9 +14,21 @@
 }
 
 .image {
-  width: calc(100% + 32px);
-  height: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+
   margin: -16px -16px 0;
+
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.03);
+
+  @media (prefers-color-scheme: light) {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  &.blur {
+    filter: blur(20px);
+  }
 }
 
 .stats {
