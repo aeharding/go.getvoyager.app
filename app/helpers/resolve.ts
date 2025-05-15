@@ -102,17 +102,20 @@ function getObjectName(urlPathname: string): string | undefined {
   if (COMMUNITY_PATH.test(urlPathname)) return "community";
 }
 
+const FALLBACK_RESOLVE_INSTANCE = "lemm.ee";
+
 /**
  * Internal implementation of resolveObject without caching.
  * This is the actual logic that makes the API calls.
  */
 async function _resolveObjectUncached(
   url: string,
+  resolveInstance?: string,
 ): Promise<ResolveObjectResponse> {
   let object;
 
   const client = new LemmyHttp(
-    buildInstanceUrl(getHostname(normalizeObjectUrl(url))),
+    buildInstanceUrl(resolveInstance ?? getHostname(normalizeObjectUrl(url))),
     { headers: LEMMY_CLIENT_HEADERS },
   );
 
@@ -154,6 +157,7 @@ async function _resolveObjectUncached(
  */
 export const resolveObject = async (
   url: string,
+  resolveInstance?: string,
 ): Promise<ResolveObjectResponse> => {
   const normalizedUrl = normalizeObjectUrl(url);
 
@@ -162,7 +166,7 @@ export const resolveObject = async (
   if (cached) return cached;
 
   // Create new promise and cache it
-  const promise = _resolveObjectUncached(url);
+  const promise = _resolveObjectUncached(url, resolveInstance);
   resolveCache.set(normalizedUrl, promise);
   return promise;
 };

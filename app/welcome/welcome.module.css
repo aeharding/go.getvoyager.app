@@ -1,0 +1,12 @@
+.conversion {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+
+  text-align: center;
+
+  > code {
+    flex: 1;
+  }
+}

@@ -10,9 +10,10 @@ import { determineIsLemmyInstance } from "~/services/lemmy";
 export async function loader({ params }: Route.LoaderArgs) {
   const isLemmyInstance = await determineIsLemmyInstance(params.instance);
 
-  if (!isLemmyInstance) throw new Error("Not a Lemmy instance");
-
-  return await resolveObject(resolveQFromParams(params));
+  return await resolveObject(
+    resolveQFromParams(params),
+    isLemmyInstance ? undefined : "lemm.ee",
+  );
 }
 
 export default function Go({ loaderData, params }: Route.ComponentProps) {
