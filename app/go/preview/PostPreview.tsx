@@ -8,11 +8,16 @@ interface PostPreviewProps {
 export default function PostPreview({ post }: PostPreviewProps) {
   return (
     <div className={styles.container}>
+      <title>{post.post.name}</title>
+      <meta property="og:image" content={post.post.thumbnail_url} />
+
       {post.post.url_content_type?.startsWith("image/") && (
         <img
           src={post.post.url}
           alt={post.post.name}
-          className={`${styles.image} ${post.post.nsfw ? styles.blur : ""}`}
+          className={`fullsize ${styles.image} ${
+            post.post.nsfw ? styles.blur : ""
+          }`}
         />
       )}
       <h2 className={styles.title}>{post.post.name}</h2>

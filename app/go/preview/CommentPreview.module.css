@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  flex: 1;
+  min-height: 0;
+}
+
+.context {
+  font-size: 0.8rem;
+  color: #999;
+
+  font-style: italic;
+}
+
+.content {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin: 0;
+}
+
+.stats {
+  font-size: 0.8rem;
+  color: #999;
+}
