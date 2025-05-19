@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  flex: 1;
+  min-height: 0;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.bio {
+  color: #999;
+
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  margin: 0;
+}
+
+.banner {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: 150px;
+
+  margin: -16px -16px 0;
+
+  object-fit: cover;
+  background-color: rgba(255, 255, 255, 0.03);
+
+  @media (prefers-color-scheme: light) {
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  &.blur {
+    filter: blur(20px);
+  }
+}
+
+.stats {
+  font-size: 0.8rem;
+  color: #999;
+}

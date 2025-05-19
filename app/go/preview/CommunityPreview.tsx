@@ -1,0 +1,43 @@
+import type { CommunityView } from "lemmy-js-client";
+import styles from "./CommunityPreview.module.css";
+
+interface CommunityPreviewProps {
+  community: CommunityView;
+}
+
+export default function CommunityPreview({ community }: CommunityPreviewProps) {
+  return (
+    <div className={styles.container}>
+      <title>{community.community.title}</title>
+      <meta
+        property="og:image"
+        content={community.community.icon ?? community.community.banner}
+      />
+
+      {community.community.banner && (
+        <img
+          src={community.community.banner}
+          alt={community.community.title}
+          className={`fullsize ${styles.banner}`}
+        />
+      )}
+      <h2 className={styles.title}>
+        {community.community.icon && (
+          <img
+            src={community.community.icon}
+            alt={community.community.title}
+            className={styles.icon}
+          />
+        )}
+        {community.community.title}
+      </h2>
+      {community.community.description && (
+        <p className={styles.description}>{community.community.description}</p>
+      )}
+      <div className={styles.stats}>
+        {community.counts.subscribers} subscribers • {community.counts.posts}{" "}
+        posts
+      </div>
+    </div>
+  );
+}
