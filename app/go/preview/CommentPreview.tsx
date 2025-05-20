@@ -1,5 +1,6 @@
 import type { CommentView } from "lemmy-js-client";
 import styles from "./CommentPreview.module.css";
+import InlineMarkdown from "~/helpers/InlineMarkdown";
 
 interface CommentPreviewProps {
   comment: CommentView;
@@ -14,7 +15,9 @@ export default function CommentPreview({ comment }: CommentPreviewProps) {
       </div>
       <title>{comment.comment.content}</title>
 
-      <h2 className={styles.content}>"{comment.comment.content}"</h2>
+      <h2 className={styles.content}>
+        <InlineMarkdown>{comment.comment.content}</InlineMarkdown>
+      </h2>
 
       <div className={styles.stats}>
         {comment.counts.score} votes • {comment.counts.child_count} replies

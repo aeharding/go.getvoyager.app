@@ -16,6 +16,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="apple-touch-icon"
+          type="image/png"
+          sizes="1024x1024"
+          href="/logo-1024.png"
+        />
         <Meta />
         <Links />
       </head>

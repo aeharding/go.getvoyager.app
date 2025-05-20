@@ -1,5 +1,6 @@
 import type { PostView } from "lemmy-js-client";
 import styles from "./PostPreview.module.css";
+import InlineMarkdown from "~/helpers/InlineMarkdown";
 
 interface PostPreviewProps {
   post: PostView;
@@ -20,7 +21,9 @@ export default function PostPreview({ post }: PostPreviewProps) {
           }`}
         />
       )}
-      <h2 className={styles.title}>{post.post.name}</h2>
+      <h2 className={styles.title}>
+        <InlineMarkdown parseBlocks={false}>{post.post.name}</InlineMarkdown>
+      </h2>
       <div className={styles.stats}>
         {post.counts.score} votes • {post.counts.comments} comments
       </div>

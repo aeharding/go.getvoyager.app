@@ -1,5 +1,6 @@
 import type { PersonView } from "lemmy-js-client";
 import styles from "./PersonPreview.module.css";
+import InlineMarkdown from "~/helpers/InlineMarkdown";
 
 interface PersonPreviewProps {
   person: PersonView;
@@ -31,7 +32,11 @@ export default function PersonPreview({ person }: PersonPreviewProps) {
         )}
         {person.person.name}
       </h2>
-      {person.person.bio && <p className={styles.bio}>{person.person.bio}</p>}
+      {person.person.bio && (
+        <p className={styles.bio}>
+          <InlineMarkdown>{person.person.bio}</InlineMarkdown>
+        </p>
+      )}
       <div className={styles.stats}>
         {person.counts.post_count} posts • {person.counts.comment_count}{" "}
         comments

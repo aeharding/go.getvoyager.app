@@ -1,5 +1,6 @@
 import type { CommunityView } from "lemmy-js-client";
 import styles from "./CommunityPreview.module.css";
+import InlineMarkdown from "~/helpers/InlineMarkdown";
 
 interface CommunityPreviewProps {
   community: CommunityView;
@@ -32,7 +33,9 @@ export default function CommunityPreview({ community }: CommunityPreviewProps) {
         {community.community.title}
       </h2>
       {community.community.description && (
-        <p className={styles.description}>{community.community.description}</p>
+        <p className={styles.description}>
+          <InlineMarkdown>{community.community.description}</InlineMarkdown>
+        </p>
       )}
       <div className={styles.stats}>
         {community.counts.subscribers} subscribers • {community.counts.posts}{" "}
