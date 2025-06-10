@@ -102,7 +102,7 @@ function getObjectName(urlPathname: string): string | undefined {
   if (COMMUNITY_PATH.test(urlPathname)) return "community";
 }
 
-const FALLBACK_RESOLVE_INSTANCE = "lemm.ee";
+const FALLBACK_RESOLVE_INSTANCE = "lemmy.zip";
 
 /**
  * Internal implementation of resolveObject without caching.

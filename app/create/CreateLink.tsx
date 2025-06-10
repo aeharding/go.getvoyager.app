@@ -16,7 +16,7 @@ export default function CreateLink() {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      <input type="text" placeholder="https://lemm.ee/post/123" name="url" />
+      <input type="text" placeholder="https://lemmy.zip/post/123" name="url" />
       <button>Share</button>
 
       {url && (
