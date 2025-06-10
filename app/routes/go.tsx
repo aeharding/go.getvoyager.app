@@ -12,7 +12,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   return await resolveObject(
     resolveQFromParams(params),
-    isLemmyInstance ? undefined : "lemm.ee",
+    isLemmyInstance ? undefined : "lemmy.zip",
   );
 }
 

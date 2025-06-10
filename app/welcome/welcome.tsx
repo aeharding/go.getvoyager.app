@@ -11,9 +11,9 @@ export function Welcome() {
       </p>
 
       <div className={styles.conversion}>
-        <code>https://lemm.ee/post/123</code>
+        <code>https://lemmy.zip/post/123</code>
         <span>⇔</span>
-        <code>https://go.getvoyager.app/lemm.ee/post/123</code>
+        <code>https://go.getvoyager.app/lemmy.zip/post/123</code>
       </div>
 
       <p>
@@ -31,7 +31,7 @@ export function Welcome() {
       <p>
         <strong>Q: Why not just share the direct Lemmy URL?</strong> You can set
         Voyager to share the original Lemmy link (e.g.{" "}
-        <code>https://lemm.ee/post/123</code>), but those always open in the
+        <code>https://lemmy.zip/post/123</code>), but those always open in the
         browser. A <code>go.getvoyager.app</code> link will open in the app if
         it's installed — making for a smoother experience and helping more
         people get into Lemmy through Voyager.
@@ -39,7 +39,7 @@ export function Welcome() {
 
       <p>
         <strong>Q: Why not use a custom protocol?</strong> Voyager supports{" "}
-        <code>vger://</code> links like <code>vger://lemm.ee/post/123</code>.
+        <code>vger://</code> links like <code>vger://lemmy.zip/post/123</code>.
         They work great <em>if</em> Voyager is installed — but won’t open if the
         app isn’t installed.
       </p>
