@@ -4,16 +4,16 @@ export function Welcome() {
   return (
     <div>
       <p>
-        Hi there! This site (go.getvoyager.app) helps you share Lemmy posts and
-        comments with Voyager users. If they have the app installed, shared
-        links will open directly in Voyager. If not, they'll see a preview with
-        options to view the content.
+        Hi there! This site (vger.to) helps you share Lemmy posts and comments
+        with Voyager users. If they have the app installed, shared links will
+        open directly in Voyager. If not, they'll see a preview with options to
+        view the content.
       </p>
 
       <div className={styles.conversion}>
         <code>https://lemmy.zip/post/123</code>
         <span>⇔</span>
-        <code>https://go.getvoyager.app/lemmy.zip/post/123</code>
+        <code>https://vger.to/lemmy.zip/post/123</code>
       </div>
 
       <p>
@@ -24,17 +24,17 @@ export function Welcome() {
       </p>
 
       <p>
-        With <code>go.getvoyager.app</code>, posts open automatically in Voyager
-        — thanks to Universal Links.
+        With <code>vger.to</code>, posts open automatically in Voyager — thanks
+        to Universal Links.
       </p>
 
       <p>
         <strong>Q: Why not just share the direct Lemmy URL?</strong> You can set
         Voyager to share the original Lemmy link (e.g.{" "}
         <code>https://lemmy.zip/post/123</code>), but those always open in the
-        browser. A <code>go.getvoyager.app</code> link will open in the app if
-        it's installed — making for a smoother experience and helping more
-        people get into Lemmy through Voyager.
+        browser. A <code>vger.to</code> link will open in the app if it's
+        installed — making for a smoother experience and helping more people get
+        into Lemmy through Voyager.
       </p>
 
       <p>

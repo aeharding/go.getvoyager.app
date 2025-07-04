@@ -15,7 +15,7 @@ export const POST_PATH = /^\/post\/(\d+)$/;
 export const COMMENT_PATH = /^\/comment\/(\d+)$/;
 
 export const LEMMY_CLIENT_HEADERS = {
-  "User-Agent": "go.getvoyager.app",
+  "User-Agent": "vger.to",
 } as const;
 
 /**

@@ -24,7 +24,7 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}
-            ghcr.io/aeharding/go-getvoyager-app
+            ghcr.io/aeharding/vger-to
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
